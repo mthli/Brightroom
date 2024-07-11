@@ -232,6 +232,7 @@ extension CropView {
         ])
       }
 
+      /*
       topControlPointView&>.do {
         NSLayoutConstraint.activate([
           $0.topAnchor.constraint(equalTo: topAnchor, constant: 0),
@@ -267,6 +268,7 @@ extension CropView {
           $0.widthAnchor.constraint(equalToConstant: length),
         ])
       }
+      */
     }
 
     // MARK: - Functions
