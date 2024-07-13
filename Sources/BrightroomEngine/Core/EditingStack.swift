@@ -190,7 +190,7 @@ open class EditingStack: Hashable, StoreComponentType {
 
     }
 
-    public fileprivate(set) var hasStartedEditing = false
+    public /* fileprivate(set) */ var hasStartedEditing = false
     /**
      A Boolean value that indicates whether the image is currently loading for editing.
      */
@@ -198,8 +198,8 @@ open class EditingStack: Hashable, StoreComponentType {
       loadedState == nil
     }
 
-    public fileprivate(set) var loadingState: Loading = .init()
-    public fileprivate(set) var loadedState: Loaded?
+    public /* fileprivate(set) */ var loadingState: Loading = .init()
+    public /* fileprivate(set) */ var loadedState: Loaded?
 
     init() {}
   }
