@@ -657,6 +657,14 @@ extension CropView {
       scale: 1,
       orientation: .up
     )
+
+    // If image has changed,
+    // we should setup scroll view again for scaling and zooming.
+    hasSetupScrollViewCompleted = false
+
+    store.commit { state in
+      state.layoutVersion += 1
+    }
   }
 
   override public func layoutSubviews() {
