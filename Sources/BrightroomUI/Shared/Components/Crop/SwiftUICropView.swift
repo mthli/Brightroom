@@ -71,6 +71,7 @@ public struct SwiftUICropView: UIViewControllerRepresentable {
       
   private let cropInsideOverlay: ((CropView.State.AdjustmentKind?) -> AnyView)?
   private let cropOutsideOverlay: ((CropView.State.AdjustmentKind?) -> AnyView)?
+  private let loadingOverlay: (() -> UIView)?
 
   private let editingStack: EditingStack
 
@@ -93,6 +94,7 @@ public struct SwiftUICropView: UIViewControllerRepresentable {
     contentInset: UIEdgeInsets? = nil,
     @ViewBuilder cropInsideOverlay: @escaping (CropView.State.AdjustmentKind?) -> InsideOverlay,
     @ViewBuilder cropOutsideOverlay: @escaping (CropView.State.AdjustmentKind?) -> OutsideOverlay,
+    loadingOverlay: (() -> UIView)? = nil,
     stateHandler: @escaping @MainActor (Verge.Changes<CropView.State>) -> Void = { _ in }
   ) {
     self.editingStack = editingStack
@@ -102,6 +104,7 @@ public struct SwiftUICropView: UIViewControllerRepresentable {
     self.contentInset = contentInset
     self.cropInsideOverlay = { AnyView(cropInsideOverlay($0)) }
     self.cropOutsideOverlay = { AnyView(cropOutsideOverlay($0)) }
+    self.loadingOverlay = loadingOverlay
     self.stateHandler = stateHandler
   }
 
@@ -115,6 +118,7 @@ public struct SwiftUICropView: UIViewControllerRepresentable {
   ) {
     self.cropInsideOverlay = nil
     self.cropOutsideOverlay = nil
+    self.loadingOverlay = nil
     self.editingStack = editingStack
     self.isGuideInteractionEnabled = isGuideInteractionEnabled
     self.isAutoApplyEditingStackEnabled = isAutoApplyEditingStackEnabled
@@ -143,6 +147,8 @@ public struct SwiftUICropView: UIViewControllerRepresentable {
     if let cropOutsideOverlay {
       view.setCropOutsideOverlay(CropView.SwiftUICropOutsideOverlay(content: cropOutsideOverlay))
     }
+
+    view.setLoadingOverlay(factory: loadingOverlay)
 
     let controller = _PixelEditor_WrapperViewController.init(bodyView: view)
 
