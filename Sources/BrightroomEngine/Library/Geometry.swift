@@ -105,7 +105,7 @@ public enum Geometry {
   }
 }
 
-extension CGSize {
+public extension CGSize {
 
   /**
    Creates an instance from CGPoint.

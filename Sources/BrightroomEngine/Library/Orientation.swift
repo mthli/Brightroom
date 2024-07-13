@@ -14,7 +14,7 @@ extension CGSize {
   
 }
 
-extension CGImagePropertyOrientation {
+public extension CGImagePropertyOrientation {
   init(_ uiOrientation: UIImage.Orientation) {
     switch uiOrientation {
     case .up: self = .up
