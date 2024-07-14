@@ -412,7 +412,7 @@ public final class CropView: UIView, UIScrollViewDelegate {
             }
 
             loaded.ifChanged(\.currentEdit.crop).do { crop in
-              self.setCrop(loaded.currentEdit.crop)
+              self.setCrop(crop)
             }
 
           }
@@ -789,6 +789,8 @@ extension CropView {
           scrollView.minimumZoomScale = min
           scrollView.maximumZoomScale = max
 
+          // Always update bounds with latest crop.
+          imagePlatterView.bounds.size = crop.scrollViewContentSize()
           imagePlatterView.frame.origin = .zero
 
           func _zoom() {

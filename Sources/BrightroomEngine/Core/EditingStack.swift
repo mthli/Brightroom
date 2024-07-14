@@ -461,6 +461,7 @@ open class EditingStack: Hashable, StoreComponentType {
             }
           }
 
+          /*
           loadedState.ifChanged(\.currentEdit.filters).do { currentEdit in
 
             self.debounceForCreatingCGImage.on { [weak self] in
@@ -487,6 +488,7 @@ open class EditingStack: Hashable, StoreComponentType {
             }
 
           }
+           */
 
         }
 
