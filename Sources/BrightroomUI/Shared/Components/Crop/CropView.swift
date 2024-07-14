@@ -415,6 +415,10 @@ public final class CropView: UIView, UIScrollViewDelegate {
               self.setCrop(crop)
             }
 
+            loaded.ifChanged(\.currentEdit.filters).do { filters in
+              self.imagePlatterView.imageView.postProcessing = filters.apply
+            }
+
           }
 
           state.ifChanged(\.isLoading).do { isLoading in
