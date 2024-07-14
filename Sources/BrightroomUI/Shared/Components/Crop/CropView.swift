@@ -653,7 +653,7 @@ public final class CropView: UIView, UIScrollViewDelegate {
 extension CropView {
   private func setImage(_ cgImage: CGImage) {
     imagePlatterView.image = UIImage(
-      cgImage: cgImage,
+      ciImage: CIImage(cgImage: cgImage),
       scale: 1,
       orientation: .up
     )

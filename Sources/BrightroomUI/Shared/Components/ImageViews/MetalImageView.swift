@@ -35,7 +35,7 @@ open class MetalImageView: MTKView, CIImageDisplaying, MTKViewDelegate {
   }
 
   private let defaultColorSpace = CGColorSpaceCreateDeviceRGB()
-  private var image: CIImage?
+  private (set) var image: CIImage?
 
   private lazy var commandQueue: MTLCommandQueue = { [unowned self] in
     self.device!.makeCommandQueue()!

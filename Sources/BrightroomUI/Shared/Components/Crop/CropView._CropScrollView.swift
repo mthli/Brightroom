@@ -70,14 +70,18 @@ extension CropView {
 
     var image: UIImage? {
       get {
-        imageView.image
+        if let i = imageView.image {
+          return UIImage(ciImage: i)
+        } else {
+          return nil
+        }
       }
       set {
-        imageView.image = newValue
+        imageView.display(image: newValue?.ciImage)
       }
     }
 
-    let imageView: UIImageView
+    let imageView: MetalImageView
 
     var overlay: UIView? {
       didSet {
@@ -89,7 +93,7 @@ extension CropView {
     }
 
     override init(frame: CGRect) {
-      self.imageView = _ImageView()
+      self.imageView = MetalImageView()
       super.init(frame: frame)
 
       addSubview(imageView)
