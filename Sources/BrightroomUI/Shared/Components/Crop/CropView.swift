@@ -407,8 +407,12 @@ public final class CropView: UIView, UIScrollViewDelegate {
 
           if let loaded = state.mapIfPresent(\.loadedState) {
 
-            loaded.ifChanged(\.imageForCrop).do { image in
-              self.setImage(image)
+            // loaded.ifChanged(\.imageForCrop).do { image in
+            //   self.setImage(image)
+            // }
+
+            loaded.ifChanged(\.editingSourceImage).do { image in
+              self.setPreviewImage(image)
             }
 
             loaded.ifChanged(\.currentEdit.crop).do { crop in
@@ -658,6 +662,22 @@ extension CropView {
   private func setImage(_ cgImage: CGImage) {
     imagePlatterView.image = UIImage(
       ciImage: CIImage(cgImage: cgImage),
+      scale: 1,
+      orientation: .up
+    )
+
+    // If image has changed,
+    // we should setup scroll view again for scaling and zooming.
+    hasSetupScrollViewCompleted = false
+
+    store.commit { state in
+      state.layoutVersion += 1
+    }
+  }
+
+  private func setPreviewImage(_ ciImage: CIImage) {
+    imagePlatterView.image = UIImage(
+      ciImage: ciImage,
       scale: 1,
       orientation: .up
     )
