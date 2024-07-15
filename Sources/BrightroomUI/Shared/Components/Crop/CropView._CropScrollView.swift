@@ -94,6 +94,7 @@ extension CropView {
 
     override init(frame: CGRect) {
       self.imageView = MetalImageView()
+      self.imageView.contentMode = .scaleAspectFit
       super.init(frame: frame)
 
       addSubview(imageView)
